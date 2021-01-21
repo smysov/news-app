@@ -32,14 +32,14 @@ const plugins = () => {
 				collapseWhitespace: isProd,
 			},
 		}),
-		// new CopyWebpackPlugin({
-		// 	patterns: [
-		// 		{
-		// 			from: path.resolve(__dirname, 'src/fonts/'),
-		// 			to: path.resolve(__dirname, 'dist/fonts'),
-		// 		},
-		// 	],
-		// }),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/assets'),
+					to: path.resolve(__dirname, 'dist/assets'),
+				},
+			],
+		}),
 		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
 			filename: filename('css'),

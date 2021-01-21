@@ -1,0 +1,14 @@
+.news-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+
+  @media (min-width: 640px) {
+    column-gap: 10px;
+  }
+
+  &__item {
+    max-width: 650px;
+  }
+}

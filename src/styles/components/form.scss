@@ -5,12 +5,14 @@
 
 .form {
   border-radius: 5px;
-  padding: 20px;
+  padding: 10px;
   flex: 1;
   max-width: 500px;
   background-color: rgba(0, 0, 0, .8);
 
-
+  @media (min-width: 640px) {
+    padding: 20px;
+  }
 
   &__inner {
     display: flex;
@@ -19,16 +21,26 @@
   }
 
   &__title {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 500;
+    text-align: center;
     text-transform: capitalize;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: $color-title-input;
+
+    @media (min-width: 640px) {
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
   }
 
   &__input-title {
-    font-size: 20px;
+    font-size: 16px;
     color: $color-title-input;
+
+    @media (min-width: 640px) {
+      font-size: 18px;
+    }
   }
 
   &__row {
@@ -42,7 +54,7 @@
 .form {
 
   &__select {
-    font-size: 20px;
+    font-size: 16px;
     letter-spacing: 1px;
     outline: none;
     box-shadow: none;
@@ -52,6 +64,10 @@
     padding-left: 10px;
     color: $color-title-input;
     cursor: pointer;
+
+    @media (min-width: 640px) {
+      font-size: 18px;
+    }
   }
 
   &__select::-ms-expand {
@@ -62,16 +78,21 @@
     width: 100%;
     font-size: 20px;
     border: none;
-    background-color: transparent;
+    background-color: transparent !important;
     border-bottom: 2px solid $color-border-input;
     text-align: center;
     outline: none;
     padding-bottom: 10px;
+    color: #fff;
   }
 
   &__search-field::placeholder {
     color: #d8d8d8;
-    font-size: 20px;
+    font-size: 15px;
+
+    @media (min-width: 640px) {
+      font-size: 17px;
+    }
   }
 
   &__submit {

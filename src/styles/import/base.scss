@@ -25,17 +25,21 @@ a {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 
 button {
-  font-size: 18px;
+  font-size: 14px;
   text-transform: uppercase;
   padding: 10px 30px;
   border: none;
   outline: none;
   background-color: $background-button;
+
+  @media (min-width: 600px) {
+    font-size: 18px;
+  }
 }
 
 .container {
