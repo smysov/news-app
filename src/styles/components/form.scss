@@ -1,0 +1,93 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  border-radius: 5px;
+  padding: 20px;
+  flex: 1;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, .8);
+
+
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    color: $color-title-input;
+  }
+
+  &__input-title {
+    font-size: 20px;
+    color: $color-title-input;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+
+//Inputs, button and select
+.form {
+
+  &__select {
+    font-size: 20px;
+    letter-spacing: 1px;
+    outline: none;
+    box-shadow: none;
+    border: 2px solid $color-border-input;
+    background-color: rgba(0, 0, 0, .8);
+    flex: 1;
+    padding-left: 10px;
+    color: $color-title-input;
+    cursor: pointer;
+  }
+
+  &__select::-ms-expand {
+    display: none;
+  }
+
+  &__search-field {
+    width: 100%;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid $color-border-input;
+    text-align: center;
+    outline: none;
+    padding-bottom: 10px;
+  }
+
+  &__search-field::placeholder {
+    color: #d8d8d8;
+    font-size: 20px;
+  }
+
+  &__submit {
+    margin: 0 auto;
+    transition: all .3s linear;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+}
