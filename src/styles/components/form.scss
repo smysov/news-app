@@ -7,7 +7,7 @@
   border-radius: 5px;
   padding: 10px;
   flex: 1;
-  max-width: 500px;
+  max-width: 700px;
   background-color: rgba(0, 0, 0, .8);
 
   @media (min-width: 640px) {
@@ -43,10 +43,19 @@
     }
   }
 
+  &__column {
+    display: flex;
+    justify-content: center;
+  }
+
   &__row {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+
+    @media (min-width: 660px) {
+      width: 80%;
+    }
   }
 }
 
@@ -84,6 +93,7 @@
     outline: none;
     padding-bottom: 10px;
     color: #fff;
+    margin: 0 auto;
   }
 
   &__search-field::placeholder {
