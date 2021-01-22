@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News application</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__link">app news</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-wrapper">
+        <form class="form" name="news">
+          <h2 class="form__title">search news</h2>
+          <div class="form__inner">
+            <div class="form__column">
+              <div class="form__row">
+                <label class="form__input-title" for="country">Choose your country</label>
+                <div class="select">
+                  <select class="form__select" name="country">
+                    <option value="ru">Russia</option>
+                    <option value="ua">Ukraine</option>
+                    <option value="us">United States</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form__column">
+              <div class="form__row">
+                <label class="form__input-title" for="search" class="title">Search</label>
+                <input class="form__search-field" id="search" type="text" name="search" autocomplete="off" placeholder="Enter a query...">
+              </div>
+            </div>
+            <div class="form__column">
+              <div class="form__row">
+                <button class="form__submit">Search</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section news">
+    <div class="container">
+      <ul class="news-list">
+      </ul>
+    </div>
+  </section>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  border-radius: 5px;
+  padding: 10px;
+  flex: 1;
+  max-width: 700px;
+  background-color: rgba(0, 0, 0, .8);
+
+  @media (min-width: 640px) {
+    padding: 20px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    color: $color-title-input;
+
+    @media (min-width: 640px) {
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+  }
+
+  &__input-title {
+    font-size: 16px;
+    color: $color-title-input;
+
+    @media (min-width: 640px) {
+      font-size: 18px;
+    }
+  }
+
+  &__column {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    @media (min-width: 660px) {
+      width: 80%;
+    }
+  }
+}
+
+//Inputs, button and select
+.form {
+
+  &__select {
+    font-size: 16px;
+    letter-spacing: 1px;
+    outline: none;
+    box-shadow: none;
+    border: 2px solid $color-border-input;
+    background-color: rgba(0, 0, 0, .8);
+    flex: 1;
+    padding-left: 10px;
+    color: $color-title-input;
+    cursor: pointer;
+
+    @media (min-width: 640px) {
+      font-size: 18px;
+    }
+  }
+
+  &__select::-ms-expand {
+    display: none;
+  }
+
+  &__search-field {
+    width: 100%;
+    font-size: 20px;
+    border: none;
+    background-color: transparent !important;
+    border-bottom: 2px solid $color-border-input;
+    text-align: center;
+    outline: none;
+    padding-bottom: 10px;
+    color: #fff;
+    margin: 0 auto;
+  }
+
+  &__search-field::placeholder {
+    color: #d8d8d8;
+    font-size: 15px;
+
+    @media (min-width: 640px) {
+      font-size: 17px;
+    }
+  }
+
+  &__submit {
+    margin: 0 auto;
+    transition: all .3s linear;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+}
