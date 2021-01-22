@@ -114,22 +114,38 @@ function onGetResponse(err, res) {
 
 //Function render news
 function renderNews(news) {
+	const urlImage = './assets/images/content/no-image.jpg';
 	const newsContainer = document.querySelector('.news-list');
+	const fragment = document.createDocumentFragment();
+
 	if (newsContainer.children.length) {
 		clearContainer(newsContainer);
 	}
-	const fragment = document.createDocumentFragment();
+
 	news.forEach(newsItem => {
+		if (!newsItem.urlToImage) {
+			newsItem.urlToImage = urlImage;
+		}
+
 		const element = newsTemplate(newsItem);
 		fragment.appendChild(element);
 	});
 	newsContainer.appendChild(fragment);
+
+	changeUrlImage(urlImage);
+}
+
+//Function change url image
+function changeUrlImage(url) {
+	const imageList = document.querySelectorAll('.card__image');
+	imageList.forEach(image => {
+		image.onerror = () => image.setAttribute('src', `${url}`);
+	});
 }
 
 //Function clear container
 function clearContainer(container) {
 	let child = container.lastElementChild;
-	console.log(child);
 	while (child) {
 		container.removeChild(child);
 		child = container.lastElementChild;
@@ -164,10 +180,10 @@ function newsTemplate({ urlToImage, title, url, description }) {
 	//Adding content
 	image.src = urlToImage;
 	header.textContent = title;
-	text.textContent = `${description}`;
+	text.textContent = description;
 	button.textContent = `Read more`;
 	button.setAttribute('target', '_blank');
-	button.href = `${url}`;
+	button.href = url;
 
 	item.appendChild(card);
 	card.appendChild(imageContainer);
