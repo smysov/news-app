@@ -127,6 +127,10 @@ function renderNews(news) {
 			newsItem.urlToImage = urlImage;
 		}
 
+		if (!newsItem.description) {
+			newsItem.description = 'No description available';
+		}
+
 		const element = newsTemplate(newsItem);
 		fragment.appendChild(element);
 	});
