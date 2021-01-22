@@ -67,10 +67,20 @@ const newService = (function () {
 			);
 		},
 		everything(query, callback) {
-			http.post(`${apiUrl}/everything?q=${query}&apiKey=${apiKey}`, callback);
+			http.get(`${apiUrl}/everything?q=${query}&apiKey=${apiKey}`, callback);
 		},
 	};
 })();
+
+//Elements
+const form = document.forms['news'];
+const selectCountry = form.elements['country'];
+const searchInput = form.elements['search'];
+
+form.addEventListener('submit', e => {
+	e.preventDefault();
+	loadNews();
+});
 
 document.addEventListener('DOMContentLoaded', function () {
 	loadNews();
@@ -78,23 +88,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Load news function
 function loadNews() {
-	newService.topHeadLines('ru', onGetResponse);
+	const country = selectCountry.value;
+	const searchText = searchInput.value;
+
+	if (!searchText) {
+		newService.topHeadLines(country, onGetResponse);
+	} else {
+		newService.everything(searchText, onGetResponse);
+	}
 }
 
 //Function on get response from server
 function onGetResponse(err, res) {
+	if (err) {
+		//show error xml status
+		return;
+	}
+
+	if (!res.articles.length) {
+		//show empty news
+	}
+
 	renderNews(res.articles);
 }
 
 //Function render news
 function renderNews(news) {
 	const newsContainer = document.querySelector('.news-list');
+	if (newsContainer.children.length) {
+		clearContainer(newsContainer);
+	}
 	const fragment = document.createDocumentFragment();
 	news.forEach(newsItem => {
 		const element = newsTemplate(newsItem);
 		fragment.appendChild(element);
 	});
 	newsContainer.appendChild(fragment);
+}
+
+//Function clear container
+function clearContainer(container) {
+	let child = container.lastElementChild;
+	console.log(child);
+	while (child) {
+		container.removeChild(child);
+		child = container.lastElementChild;
+	}
 }
 
 //News item template function
