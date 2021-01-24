@@ -77,6 +77,7 @@ const newService = (function () {
 form.addEventListener('submit', e => {
 	e.preventDefault();
 	loadNews();
+	form.reset();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -88,7 +89,6 @@ function loadNews() {
 	const country = selectCountry.value;
 	const category = selectCategory.value;
 	const searchText = searchInput.value;
-	
 
 	if (!searchText) {
 		newService.topHeadLines(country, category, onGetResponse);
@@ -96,4 +96,3 @@ function loadNews() {
 		newService.everything(searchText, onGetResponse);
 	}
 }
-console.log(selectCategory)

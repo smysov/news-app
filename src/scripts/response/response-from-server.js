@@ -1,4 +1,5 @@
 import { renderNews } from '../render/render-news';
+import { renderOverlay } from '../overlay/render-overlay';
 
 //Function on get response from server
 export function onGetResponse(err, res) {
@@ -8,7 +9,7 @@ export function onGetResponse(err, res) {
 	}
 
 	if (!res.articles.length) {
-		//show empty news
+		renderOverlay();
 	}
 
 	renderNews(res.articles);
