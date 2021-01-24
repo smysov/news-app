@@ -1,5 +1,6 @@
-import { loadNews } from './load/load-news';
 import { form } from './elements/elements';
+import { onGetResponse } from './response/response-from-server';
+import { selectCountry, searchInput } from './elements/elements';
 
 function newHttpRequest() {
 	return {
@@ -55,9 +56,24 @@ function newHttpRequest() {
 		},
 	};
 }
+const http = newHttpRequest();
 
-export const http = newHttpRequest();
+const newService = (function () {
+	const apiKey = 'd8d6722d7fbf4a0bacf7552d2be4b0b8';
+	const apiUrl = 'https://news-api-v2.herokuapp.com';
 
+	return {
+		topHeadLines(country = 'ru', callback) {
+			http.get(
+				`${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`,
+				callback,
+			);
+		},
+		everything(query, callback) {
+			http.get(`${apiUrl}/everything?q=${query}&apiKey=${apiKey}`, callback);
+		},
+	};
+})();
 
 form.addEventListener('submit', e => {
 	e.preventDefault();
@@ -67,3 +83,15 @@ form.addEventListener('submit', e => {
 document.addEventListener('DOMContentLoaded', function () {
 	loadNews();
 });
+
+//Load news function
+function loadNews() {
+	const country = selectCountry.value;
+	const searchText = searchInput.value;
+
+	if (!searchText) {
+		newService.topHeadLines(country, onGetResponse);
+	} else {
+		newService.everything(searchText, onGetResponse);
+	}
+}
