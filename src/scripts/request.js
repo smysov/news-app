@@ -1,6 +1,5 @@
-import { form } from './elements/elements';
 import { onGetResponse } from './response/response-from-server';
-import { selectCountry, searchInput } from './elements/elements';
+import { form, selectCountry, searchInput, selectCategory } from './elements/elements';
 
 function newHttpRequest() {
 	return {
@@ -63,9 +62,9 @@ const newService = (function () {
 	const apiUrl = 'https://news-api-v2.herokuapp.com';
 
 	return {
-		topHeadLines(country = 'ru', callback) {
+		topHeadLines(country = 'ru', category = 'business', callback) {
 			http.get(
-				`${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`,
+				`${apiUrl}/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`,
 				callback,
 			);
 		},
@@ -87,11 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
 //Load news function
 function loadNews() {
 	const country = selectCountry.value;
+	const category = selectCategory.value;
 	const searchText = searchInput.value;
+	
 
 	if (!searchText) {
-		newService.topHeadLines(country, onGetResponse);
+		newService.topHeadLines(country, category, onGetResponse);
 	} else {
 		newService.everything(searchText, onGetResponse);
 	}
 }
+console.log(selectCategory)
