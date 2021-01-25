@@ -4,6 +4,7 @@ import { clearContainer } from '../clear/clear-container';
 
 //Function render news
 export function renderNews(news) {
+
 	const urlImage = './assets/images/content/no-image.jpg';
 	const newsContainer = document.querySelector('.news-list');
 	const fragment = document.createDocumentFragment();
