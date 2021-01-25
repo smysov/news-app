@@ -18,6 +18,13 @@ News app with the ability to search for top news by country and category or by k
 
 ---
 
+<p align="center">
+
+<img src="https://i.ibb.co/xCsTtzt/news-app.gif">
+
+</p>
+
+
 ## Installation
 
 First you need to clone repository
