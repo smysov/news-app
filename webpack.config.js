@@ -35,8 +35,8 @@ const plugins = () => {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, 'src/assets'),
-					to: path.resolve(__dirname, 'dist/assets'),
+					from: path.resolve(__dirname, 'src/assets/images'),
+					to: path.resolve(__dirname, 'dist/assets/images'),
 				},
 			],
 		}),
@@ -56,6 +56,7 @@ const plugins = () => {
 const filename = ext => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 module.exports = {
+	target: 'web',
 	context: path.resolve(__dirname, 'src'),
 	mode: 'development',
 	entry: {
@@ -64,6 +65,7 @@ module.exports = {
 	output: {
 		filename: filename('js'),
 		path: path.resolve(__dirname, 'dist/'),
+		publicPath: '/',
 	},
 	resolve: {
 		extensions: ['.js', '.json', '.png', '.csv'],
@@ -75,6 +77,7 @@ module.exports = {
 	devServer: {
 		port: 4200,
 		open: true,
+		hot: true,
 	},
 	devtool: isDev ? 'source-map' : false,
 	plugins: plugins(),
@@ -86,10 +89,11 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
-							publicPath: '',
+							publicPath: '/',
 						},
 					},
 					'css-loader',
+					'postcss-loader',
 				],
 			},
 			{
@@ -109,6 +113,7 @@ module.exports = {
 						loader: MiniCssExtractPlugin.loader,
 					},
 					'css-loader',
+					'postcss-loader',
 					'sass-loader',
 				],
 			},
@@ -117,8 +122,11 @@ module.exports = {
 				use: ['file-loader'],
 			},
 			{
-				test: /\.(ttf|woff|woff2|eot)$/,
-				use: ['file-loader'],
+				test: /\.(ttf|woff|otf|eot|woff2)$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: 'assets/fonts/[name].[ext]',
+				},
 			},
 			{
 				test: /\.m?js$/,

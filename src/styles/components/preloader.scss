@@ -1,0 +1,49 @@
+.preloader {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #827ae0;
+  animation: loader 3s linear infinite;
+  margin: 0 auto;
+  padding: 20px 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #827ae0;
+    box-shadow: -3px -3px 15px 1px rgba(255, 255, 255, 0.12),
+      3px 3px 15px 1px rgba(0, 0, 0, 0.55);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 22px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 1;
+    box-shadow: inset 3px 3px 8px 1px rgba(0, 0, 0, 0.5),
+      inset -2px -2px 8px 1px rgba(255, 255, 255, 0.13);
+  }
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0);
+    filter: hue-rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
+}

@@ -1,3 +1,7 @@
+import { onGetResponse } from './response/response-from-server';
+import { form, selectCountry, searchInput, selectCategory } from './elements/elements';
+import { showPreloader } from './preloader/show';
+
 function newHttpRequest() {
 	return {
 		get(url, callback) {
@@ -52,17 +56,16 @@ function newHttpRequest() {
 		},
 	};
 }
-
 const http = newHttpRequest();
 
 const newService = (function () {
 	const apiKey = 'd8d6722d7fbf4a0bacf7552d2be4b0b8';
-	const apiUrl = 'https://news-api-v2.herokuapp.com';
+	const apiUrl = 'https://newsapi.org/v2';
 
 	return {
-		topHeadLines(country = 'ru', callback) {
+		topHeadLines(country = 'ru', category = 'business', callback) {
 			http.get(
-				`${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`,
+				`${apiUrl}/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`,
 				callback,
 			);
 		},
@@ -72,14 +75,10 @@ const newService = (function () {
 	};
 })();
 
-//Elements
-const form = document.forms['news'];
-const selectCountry = form.elements['country'];
-const searchInput = form.elements['search'];
-
 form.addEventListener('submit', e => {
 	e.preventDefault();
 	loadNews();
+	form.reset();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -88,111 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Load news function
 function loadNews() {
+	showPreloader();
 	const country = selectCountry.value;
+	const category = selectCategory.value;
 	const searchText = searchInput.value;
 
 	if (!searchText) {
-		newService.topHeadLines(country, onGetResponse);
+		newService.topHeadLines(country, category, onGetResponse);
 	} else {
 		newService.everything(searchText, onGetResponse);
 	}
-}
-
-//Function on get response from server
-function onGetResponse(err, res) {
-	if (err) {
-		//show error xml status
-		return;
-	}
-
-	if (!res.articles.length) {
-		//show empty news
-	}
-
-	renderNews(res.articles);
-}
-
-//Function render news
-function renderNews(news) {
-	const urlImage = './assets/images/content/no-image.jpg';
-	const newsContainer = document.querySelector('.news-list');
-	const fragment = document.createDocumentFragment();
-
-	if (newsContainer.children.length) {
-		clearContainer(newsContainer);
-	}
-
-	news.forEach(newsItem => {
-		if (!newsItem.urlToImage) {
-			newsItem.urlToImage = urlImage;
-		}
-
-		const element = newsTemplate(newsItem);
-		fragment.appendChild(element);
-	});
-	newsContainer.appendChild(fragment);
-
-	changeUrlImage(urlImage);
-}
-
-//Function change url image
-function changeUrlImage(url) {
-	const imageList = document.querySelectorAll('.card__image');
-	imageList.forEach(image => {
-		image.onerror = () => image.setAttribute('src', `${url}`);
-	});
-}
-
-//Function clear container
-function clearContainer(container) {
-	let child = container.lastElementChild;
-	while (child) {
-		container.removeChild(child);
-		child = container.lastElementChild;
-	}
-}
-
-//News item template function
-function newsTemplate({ urlToImage, title, url, description }) {
-	const item = document.createElement('li');
-	const card = document.createElement('div');
-	const imageContainer = document.createElement('div');
-	const image = document.createElement('img');
-	const headerContainer = document.createElement('div');
-	const header = document.createElement('h3');
-	const textContainer = document.createElement('div');
-	const text = document.createElement('p');
-	const buttonContainer = document.createElement('div');
-	const button = document.createElement('a');
-
-	//Adding classes
-	item.classList.add('news-list__item');
-	card.classList.add('card');
-	imageContainer.classList.add('card__image-inner');
-	image.classList.add('card__image');
-	headerContainer.classList.add('card__title-inner');
-	header.classList.add('card__title');
-	textContainer.classList.add('card__description');
-	text.classList.add('card__text');
-	buttonContainer.classList.add('card__inner-button');
-	button.classList.add('card__link');
-
-	//Adding content
-	image.src = urlToImage;
-	header.textContent = title;
-	text.textContent = description;
-	button.textContent = `Read more`;
-	button.setAttribute('target', '_blank');
-	button.href = url;
-
-	item.appendChild(card);
-	card.appendChild(imageContainer);
-	card.appendChild(textContainer);
-	card.appendChild(buttonContainer);
-	imageContainer.appendChild(image);
-	imageContainer.appendChild(headerContainer);
-	headerContainer.appendChild(header);
-	textContainer.appendChild(text);
-	buttonContainer.appendChild(button);
-	return item;
 }
