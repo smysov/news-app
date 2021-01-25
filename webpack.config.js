@@ -35,8 +35,8 @@ const plugins = () => {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-					from: path.resolve(__dirname, 'src/assets'),
-					to: path.resolve(__dirname, 'dist/assets'),
+					from: path.resolve(__dirname, 'src/assets/images'),
+					to: path.resolve(__dirname, 'dist/assets/images'),
 				},
 			],
 		}),
@@ -65,7 +65,7 @@ module.exports = {
 	output: {
 		filename: filename('js'),
 		path: path.resolve(__dirname, 'dist/'),
-		publicPath: '/'
+		publicPath: '/',
 	},
 	resolve: {
 		extensions: ['.js', '.json', '.png', '.csv'],
@@ -122,8 +122,11 @@ module.exports = {
 				use: ['file-loader'],
 			},
 			{
-				test: /\.(ttf|woff|woff2|eot)$/,
-				use: ['file-loader'],
+				test: /\.(ttf|woff|otf|eot|woff2)$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: 'assets/fonts/[name].[ext]',
+				},
 			},
 			{
 				test: /\.m?js$/,
