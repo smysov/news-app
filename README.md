@@ -11,7 +11,10 @@
 
 <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/smysov/news-app?style=plastic">
 
-<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/smysov/news-app/total">
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/smysov/news-app/total?style=plastic">
+
+<img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/smysov/news-app?label=package.json&style=plastic">
+
 </p>
 
 News app with the ability to search for top news by country and category or by keyword!
@@ -20,7 +23,7 @@ News app with the ability to search for top news by country and category or by k
 
 <p align="center">
 
-<img src="https://i.ibb.co/xCsTtzt/news-app.gif">
+<img  src="https://i.ibb.co/xCsTtzt/news-app.gif">
 
 </p>
 
