@@ -1,6 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  flex: 1;
   border: 2px solid rgb(10, 112, 32);
 
   &__image-inner {
