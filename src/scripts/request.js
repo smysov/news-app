@@ -60,7 +60,7 @@ const http = newHttpRequest();
 
 const newService = (function () {
 	const apiKey = 'd8d6722d7fbf4a0bacf7552d2be4b0b8';
-	const apiUrl = 'https://newsapi.org/v2';
+	const apiUrl = 'https://news-api-v2.herokuapp.com';
 
 	return {
 		topHeadLines(country = 'ru', category = 'business', callback) {

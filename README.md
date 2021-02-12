@@ -27,6 +27,8 @@ News app with the ability to search for top news by country and category or by k
 
 </p>
 
+# [View a demo](https://news-api-947ce.web.app/)
+
 
 ## Installation
 
